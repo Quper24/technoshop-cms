@@ -12,6 +12,8 @@ const openModal = (id) => {
 export const closeModal = () => {
   modal.classList.remove('d-block');
   form.reset();
+  form.identificator.value = '';
+  form.imagesave.value = '';
   hidePreview();
 }
 
@@ -26,12 +28,12 @@ export const modalController = ({btn, delegation }) => {
 
   if (delegation) {
     delegation.parent.addEventListener('click', ({target}) => {
-      const targetBtn = target.closest(delegation.target);
+      const goodsRow = target.closest(delegation.target);
       const targetExclude = target.closest(delegation.targetExclude);
-      if (targetBtn && !targetExclude) {
-        modalTitle.textContent = `Изменить товар #${targetBtn.dataset.id}`;
+      if (goodsRow && !targetExclude) {
+        modalTitle.textContent = `Изменить товар #${goodsRow.dataset.id}`;
         modalSubmitBtn.textContent = 'Изменить товар';
-        openModal(targetBtn.dataset.id)
+        openModal(goodsRow.dataset.id)
       }
     })
   }
